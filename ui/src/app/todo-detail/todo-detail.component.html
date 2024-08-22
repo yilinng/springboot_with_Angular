@@ -1,0 +1,11 @@
+<div *ngIf="todo" class="todo_detail">
+  <h2 class="title" data-testid="todo-title">title: {{ todo.title }} Details</h2>
+  <p class="content" data-testid="todo-content">content: {{ todo.content }}</p>
+
+  <div class="date" data-testid="todo-date" [hidden]="updateDate">update date: {{ todo.updateDate | date : "MM/dd/yy" }}</div>
+
+
+  <button type="button" class="backBtn" (click)="goBack()" data-testid="todo-btn">go back</button>
+</div>
+
+<app-spinner  *ngIf="!todo"></app-spinner>

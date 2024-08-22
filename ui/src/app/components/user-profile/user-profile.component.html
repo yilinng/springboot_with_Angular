@@ -1,0 +1,64 @@
+<div class="user_detail" *ngIf="currentUser && currentUser?.name" >
+  <div class="user_Content">
+
+    <div class="user_Form" [hidden]="submitted" *ngIf="clickTodo">
+      <h3 *ngIf="!editTodo">Add Todo</h3>
+      <h3 *ngIf="editTodo">Edit Todo</h3>
+      <form (ngSubmit)="onSubmit()" [formGroup]="addTodoForm">
+        <div class="form-group">
+          <label for="name">Title</label>
+          <input type="text" class="form-control" id="title" name="title" formControlName="title" required />
+        </div>
+
+        <div class="form-group">
+          <label for="alterEgo">Content</label>
+          <textarea class="form-control" id="content" name="content" formControlName="content" required></textarea>
+        </div>
+
+
+        <button type="submit" class="submitBtn" [disabled]="checkValue()">Submit</button>
+        <button type="button" class="newBtn" (click)="newTodo()" [hidden]="editTodo">Reset Todo</button>
+      </form>
+
+    </div>
+
+
+
+    <div class="detail"  [@openClose]="showUser ? 'open' : 'closed'">
+      <div *ngIf="showUser">
+      <h3>user detail</h3>
+      <div class="name">name: {{currentUser.name}}</div>
+      <div class="email">email: {{currentUser.email}}</div>
+    </div>
+    </div>
+
+  </div>
+  <div class="column todoList">
+    <div class="header">
+      <span class="title">todoList</span>
+      <div class="btnList">
+        <button type="button" class="addBtn" (click)="showTodo()">Add Todo + </button>
+        <button type="button" class="showBtn" (click)="clickUser()">Show user detail </button>
+      </div>
+    </div>
+
+    <ul>
+      <li *ngFor="let todo of todos" class="todo">
+        <div class="todoHeader">
+        <a routerLink="/todos/{{todo.id}}">
+          <h2 class="badge">{{todo.title && truncateString(todo.title, 30) }}</h2>
+        </a>
+        <div class="button_list">
+        <button type="button" class="editBtn" title="edit todo" (click)="editForm(todo)">edit</button>
+        <button type="button" class="deleteBtn" title="delete todo" (click)="delete(todo)">delete</button>
+        </div>
+      </div>
+        <p class="todo_content">content: {{todo.content && truncateString(todo.content, 100)}}</p>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<app-spinner *ngIf="!currentUser"></app-spinner>
+
