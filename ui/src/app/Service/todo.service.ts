@@ -15,7 +15,7 @@ import { AppConstants } from '../common/app.constants';
   providedIn: 'root'
 })
 export class TodoService {
-  endpoint: string = AppConstants.API_URL +'/todos';
+  endpoint: string = AppConstants.API_URL +'todos';
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', "Bearer " + this.getToken())
 
   constructor(private http: HttpClient, private messageService: MessageService, private cookieService: CookieService) { }

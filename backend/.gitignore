@@ -34,4 +34,4 @@ build/
 
 test.rest
 
-env
+.env
